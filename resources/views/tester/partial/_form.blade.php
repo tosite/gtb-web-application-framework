@@ -23,7 +23,7 @@
                 <div class="input-field col s12">
                     <input id="params" type="text" class="validate">
                     <label for="params">Params</label>
-                    <span class="helper-text" data-error="wrong" data-success="right">Optional.</span>
+                    <span class="helper-text">Optional.</span>
                 </div>
             </div>
         </div>
