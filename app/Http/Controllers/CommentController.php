@@ -8,7 +8,10 @@ class CommentController extends Controller
 {
     public function index()
     {
-        //
+        return [
+            ['id' => 1, 'name' => 'yamada', 'content' => 'hello'],
+            ['id' => 2, 'name' => 'tanaka', 'content' => 'world'],
+        ];
     }
 
     public function store(Request $request)
@@ -18,7 +21,7 @@ class CommentController extends Controller
 
     public function show($id)
     {
-        //
+        return ['id' => 2, 'name' => 'tanaka', 'content' => 'world'];
     }
 
     public function update(Request $request, $id)
