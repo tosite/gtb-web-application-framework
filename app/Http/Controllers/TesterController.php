@@ -9,7 +9,9 @@ class TesterController extends Controller
 
     public function index()
     {
-        return view('tester/index');
+        \Artisan::call('route:list');
+        $route = \Artisan::Output();
+        return view('tester/index', ['route' => $route]);
     }
 
     public function get(Request $request)
