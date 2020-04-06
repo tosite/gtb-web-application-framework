@@ -9,19 +9,18 @@ class TesterController extends Controller
 
     public function index()
     {
-        \Artisan::call('route:list');
-        $route = \Artisan::Output();
+        $route = $this->getRoute();
         return view('tester/index', ['route' => $route]);
     }
 
     public function exec(Request $request)
     {
-        \Artisan::call('route:list');
-        $route = \Artisan::Output();
+        $route = $this->getRoute();
         $action = $request->input('action');
         $uri = $request->input('uri');
+        $url = request()->getSchemeAndHttpHost() . (empty($uri) ? '' : $uri);
         $params = $request->input('params');
-        $res = $this->execCurl($action, $uri, $params);
+        $res = $this->getCurlResponse($action, $url, $params);
         return view('tester/index', [
             'route'   => $route,
             'header'  => implode(PHP_EOL, $res['curl']['header']),
@@ -33,22 +32,33 @@ class TesterController extends Controller
         ]);
     }
 
-    private function execCurl($method, $uri = '', $params = '')
+    private function getRoute()
     {
-        $command = 'curl ' . request()->getSchemeAndHttpHost() . (empty($uri) ? '': $uri);
+        \Artisan::call('route:list');
+        return\Artisan::Output();
+    }
+
+    private function getCurlResponse($method, $url = '', $params = '')
+    {
+        $command = $this->getCommand($method, $url, $params);
+        return ['command' => $command, 'curl' => $this->execCurl($command)];
+    }
+
+    private function getCommand($method, $url, $params)
+    {
+        $command = "curl {$url}";
         if ($method === 'get') {
-            return ['command' => $command, 'curl' => $this->_exec($command)];
+            return $command;
         }
 
         $command .= ' -X' . strtoupper($method);
         if (empty($params) || $method === 'delete') {
-            return ['command' => $command, 'curl' => $this->_exec($command)];
+            return $command;
         }
-        $command = "{$command} -d {$params}";
-        return ['command' => $command, 'curl' => $this->_exec($command)];
+        return "{$command} -d {$params}";
     }
 
-    private function _exec($command)
+    private function execCurl($command)
     {
         exec($command . ' -I', $header);
         exec($command, $result);
