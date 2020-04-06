@@ -16,7 +16,7 @@ class CommentController extends Controller
 
     public function store(Request $request)
     {
-        //
+        return response()->json(['id' => 3, 'name' => 'sato', 'content' => '!!'], 201);
     }
 
     public function show($id)
@@ -26,11 +26,11 @@ class CommentController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        return response()->noContent(200);
     }
 
     public function destroy($id)
     {
-        //
+        return response()->noContent();
     }
 }
