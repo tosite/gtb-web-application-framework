@@ -1,6 +1,6 @@
 <form method="post" action="/tester" id="tester">
     <div class="card">
-        <div class="card-content pb0">
+        <div class="card-content">
             <div class="row">
                 {{ csrf_field() }}
                 <div class="col s12 m6">
