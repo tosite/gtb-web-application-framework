@@ -1,4 +1,4 @@
-<form method="post" action="" id="tester">
+<form method="post" action="/tester" id="tester">
     <div class="card">
         <div class="card-content pb0">
             <div class="row">
@@ -36,12 +36,3 @@
         </div>
     </div>
 </form>
-
-<script>
-  function setAction() {
-    const form = document.getElementById('tester');
-    const select = document.getElementById('form-action');
-    const action = select.selectedOptions[0].value;
-    form.action = `/tester/${action}`;
-  }
-</script>

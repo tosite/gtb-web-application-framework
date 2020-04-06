@@ -14,27 +14,12 @@ class TesterController extends Controller
         return view('tester/index', ['route' => $route]);
     }
 
-    public function get(Request $request)
+    public function exec(Request $request)
     {
         \Artisan::call('route:list');
         $route = \Artisan::Output();
         $res = $this->execCurl($request->input('action'),$request->input('params'));
         return view('tester/index', ['route' => $route, 'result' => implode(PHP_EOL, $res)]);
-    }
-
-    public function post(Request $request)
-    {
-        //
-    }
-
-    public function put(Request $request)
-    {
-        //
-    }
-
-    public function delete(Request $request)
-    {
-        //
     }
 
     private function execCurl($method, $params)

@@ -17,8 +17,5 @@ Route::get('/', function () {
 
 Route::prefix('tester')->group(function () {
     Route::get('', 'TesterController@index');
-    Route::post('get', 'TesterController@get');
-    Route::post('post', 'TesterController@post');
-    Route::post('put', 'TesterController@put');
-    Route::post('delete', 'TesterController@delete');
+    Route::post('', 'TesterController@exec');
 });
