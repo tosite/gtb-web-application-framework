@@ -14,7 +14,16 @@
 
 <body>
 
-<div class="container">
+<nav>
+    <div class="nav-wrapper blue darken-2">
+        <a href="#" class="brand-logo">GTB2020</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+<!--            <li><a href="sass.html">Sass</a></li>-->
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid">
     @yield('content')
 </div>
 
