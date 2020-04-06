@@ -18,8 +18,13 @@ class TesterController extends Controller
     {
         \Artisan::call('route:list');
         $route = \Artisan::Output();
-        $res = $this->execCurl($request->input('action'),$request->input('params'));
-        return view('tester/index', ['route' => $route, 'result' => implode(PHP_EOL, $res)]);
+        $res = $this->execCurl($request->input('action'), $request->input('params'));
+        return view('tester/index', [
+            'route'   => $route,
+            'result'  => implode(PHP_EOL, $res['result']),
+            'method'  => $request->input('action'),
+            'command' => $res['command'],
+        ]);
     }
 
     private function execCurl($method, $params)
@@ -28,15 +33,16 @@ class TesterController extends Controller
         $result = [];
         if ($method === 'get') {
             exec($command, $result);
-            return $result;
+            return ['command' => $command, 'result' => $result];
         }
 
         $command .= ' -X' . strtoupper($method);
-        if (empty($params) ||$method === 'delete') {
+        if (empty($params) || $method === 'delete') {
             exec($command, $result);
-            return $result;
+            return ['command' => $command, 'result' => $result];
         }
-        exec("{$command} -d {$params}", $result);
-        return $result;
+        $command = "{$command} -d {$params}";
+        exec($command, $result);
+        return ['command' => $command, 'result' => $result];
     }
 }

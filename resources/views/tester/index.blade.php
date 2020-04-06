@@ -14,6 +14,12 @@
         @if (!empty($result))
         <div class="card blue-grey darken-2">
             <div class="card-content white-text" style="overflow-x: scroll">
+                <pre><code class="code green-grey"># {{ $method }}{{ PHP_EOL }}{{ $command }}</code></pre>
+            </div>
+        </div>
+
+        <div class="card blue-grey darken-2">
+            <div class="card-content white-text" style="overflow-x: scroll">
                 <pre><code class="code green-text text-lighten-2">{{ $result }}</code></pre>
             </div>
         </div>
