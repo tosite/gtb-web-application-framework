@@ -23,21 +23,21 @@
     <div id="swipe-1" class="col s12">
         <div class="row">
             <div class="col s5">
-                <h3 class="pink-text text-lighten-1">API Tester</h3>
+                <h4 class="pink-text text-lighten-1">API Tester</h4>
                 @include('tester.partial._form')
             </div>
 
             <div class="col s7">
-                <h3 class="pink-text text-lighten-1">Result</h3>
+                <h4 class="pink-text text-lighten-1">Result</h4>
                 @if (!empty($result))
                 <div class="card" style="background: #202746;">
-                    <div class="card-content white-text" style="overflow-x: scroll">
-                        <pre><code class="code sh"># {{ $method }}{{ PHP_EOL }}{{ $command }}</code></pre>
+                    <div class="card-content white-text pt-0 bp-0" style="overflow-x: scroll">
+                        <pre><code class="code sh"># {{ $method }}{{ PHP_EOL }}{{ $command }}{{ PHP_EOL }}{{ $header }}</code></pre>
                     </div>
                 </div>
 
                 <div class="card" style="background: #202746; max-height: 500px; overflow-y: scroll;">
-                    <div class="card-content white-text" style="overflow-x: scroll">
+                    <div class="card-content white-text pt-0 bp-0" style="overflow-x: scroll">
                         <pre><code class="code green-text text-lighten-2">{{ $result }}</code></pre>
                     </div>
                 </div>
@@ -49,9 +49,9 @@
     <div id="swipe-2" class="col s12">
         <div class="row">
             <div class="col s12">
-                <h3 class="pink-text text-lighten-1">Routes</h3>
+                <h4 class="pink-text text-lighten-1">Routes</h4>
                 <div class="card" style="background: #202746;">
-                    <div class="card-content white-text" style="overflow-x: scroll">
+                    <div class="card-content white-text pt-0 bp-0" style="overflow-x: scroll">
                         <pre><code class="code plaintext green-text text-lighten-2">{{ $route }}</code></pre>
                     </div>
                 </div>

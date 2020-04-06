@@ -13,15 +13,20 @@
                             required
                     >
                         <option value="" disabled selected>Choose Methods</option>
-                        <option value="get">get</option>
-                        <option value="post">post</option>
-                        <option value="put">put/patch</option>
-                        <option value="delete">delete</option>
+                        <option value="get" @if($method === 'get') selected @endif>get</option>
+                        <option value="post" @if($method === 'post') selected @endif>post</option>
+                        <option value="put" @if($method === 'put') selected @endif>put/patch</option>
+                        <option value="delete" @if($method === 'delete') selected @endif>delete</option>
                     </select>
                 </div>
                 <div class="col m6"></div>
                 <div class="input-field col s12">
-                    <input id="params" type="text" class="validate">
+                    <input id="uri" name="uri" type="text" class="validate" placeholder="/comments" value="{{ $uri }}">
+                    <label for="uri">Uri</label>
+                </div>
+                <div class="col m6"></div>
+                <div class="input-field col s12">
+                    <input id="params" id="params" type="text" class="validate" value="{{ $params }}">
                     <label for="params">Params</label>
                     <span class="helper-text">Optional.</span>
                 </div>

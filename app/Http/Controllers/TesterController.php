@@ -18,31 +18,40 @@ class TesterController extends Controller
     {
         \Artisan::call('route:list');
         $route = \Artisan::Output();
-        $res = $this->execCurl($request->input('action'), $request->input('params'));
+        $action = $request->input('action');
+        $uri = $request->input('uri');
+        $params = $request->input('params');
+        $res = $this->execCurl($action, $uri, $params);
         return view('tester/index', [
             'route'   => $route,
-            'result'  => implode(PHP_EOL, $res['result']),
-            'method'  => $request->input('action'),
+            'header'  => implode(PHP_EOL, $res['curl']['header']),
+            'result'  => implode(PHP_EOL, $res['curl']['result']),
+            'method'  => $action,
+            'uri'     => $uri,
+            'params'  => $params,
             'command' => $res['command'],
         ]);
     }
 
-    private function execCurl($method, $params)
+    private function execCurl($method, $uri = '', $params = '')
     {
-        $command = 'curl ' . request()->getSchemeAndHttpHost();
-        $result = [];
+        $command = 'curl ' . request()->getSchemeAndHttpHost() . (empty($uri) ? '': $uri);
         if ($method === 'get') {
-            exec($command, $result);
-            return ['command' => $command, 'result' => $result];
+            return ['command' => $command, 'curl' => $this->_exec($command)];
         }
 
         $command .= ' -X' . strtoupper($method);
         if (empty($params) || $method === 'delete') {
-            exec($command, $result);
-            return ['command' => $command, 'result' => $result];
+            return ['command' => $command, 'curl' => $this->_exec($command)];
         }
         $command = "{$command} -d {$params}";
+        return ['command' => $command, 'curl' => $this->_exec($command)];
+    }
+
+    private function _exec($command)
+    {
+        exec($command . ' -I', $header);
         exec($command, $result);
-        return ['command' => $command, 'result' => $result];
+        return ['header' => $header, 'result' => $result];
     }
 }
