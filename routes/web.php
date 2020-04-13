@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('tester')->group(function () {
+    Route::get('', 'TesterController@index');
+    Route::post('', 'TesterController@exec');
+});
