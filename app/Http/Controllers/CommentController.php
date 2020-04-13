@@ -24,7 +24,7 @@ class CommentController extends Controller
         return Comment::findOrFail($id);
     }
 
-    public function update(Request $request, $id)
+    public function update(\App\Http\Requests\Comments\Put $request, $id)
     {
         $comment = Comment::findOrFail($id);
         $comment->fill($request->input())->save();
