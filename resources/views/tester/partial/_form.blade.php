@@ -26,7 +26,7 @@
                 </div>
                 <div class="col m6"></div>
                 <div class="input-field col s12">
-                    <input id="params" id="params" type="text" class="validate" value="{{ $params }}">
+                    <input id="params" name="params" type="text" class="validate" value="{{ $params }}">
                     <label for="params">Params</label>
                     <span class="helper-text">Optional.</span>
                 </div>
