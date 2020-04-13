@@ -14,7 +14,9 @@ class CommentController extends Controller
 
     public function store(Request $request)
     {
-        return response()->json(['id' => 3, 'name' => 'sato', 'content' => '!!'], 201);
+        $comment = new Comment();
+        $comment->fill($request->input())->save();
+        return response()->json($comment, 201);
     }
 
     public function show($id)
