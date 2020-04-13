@@ -21,7 +21,7 @@
                 </div>
                 <div class="col m6"></div>
                 <div class="input-field col s12">
-                    <input id="uri" name="uri" type="text" class="validate" placeholder="/comments" value="{{ $uri }}">
+                    <input id="uri" name="uri" type="text" class="validate" placeholder="/api/comments" value="{{ $uri }}">
                     <label for="uri">Uri</label>
                 </div>
                 <div class="col m6"></div>
