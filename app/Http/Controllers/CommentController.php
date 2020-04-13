@@ -26,7 +26,7 @@ class CommentController extends Controller
 
     public function update(Request $request, $id)
     {
-        return response()->noContent(200);
+        return response()->json(['id' => 2, 'name' => 'tanako', 'content' => 'word!'], 200);
     }
 
     public function destroy($id)
