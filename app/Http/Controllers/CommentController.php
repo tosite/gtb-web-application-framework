@@ -33,6 +33,7 @@ class CommentController extends Controller
 
     public function destroy($id)
     {
+        Comment::destroy($id);
         return response()->noContent();
     }
 }
