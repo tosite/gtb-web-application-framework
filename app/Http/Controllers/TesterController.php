@@ -59,7 +59,7 @@ class TesterController extends Controller
         if (empty($params) || $method === 'delete') {
             return $command;
         }
-        return "{$command} -d {$params}";
+        return "{$command} -d '{$params}'";
     }
 
     private function execCurl($command)
