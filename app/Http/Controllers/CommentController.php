@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Comment;
 
 class CommentController extends Controller
 {
     public function index()
     {
-        return [
-            ['id' => 1, 'name' => 'yamada', 'content' => 'hello'],
-            ['id' => 2, 'name' => 'tanaka', 'content' => 'world'],
-        ];
+        return Comment::all();
     }
 
     public function store(Request $request)
