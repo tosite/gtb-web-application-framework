@@ -12,7 +12,7 @@ class CommentController extends Controller
         return Comment::all();
     }
 
-    public function store(Request $request)
+    public function store(\App\Http\Requests\Comments\Post $request)
     {
         $comment = new Comment();
         $comment->fill($request->input())->save();
