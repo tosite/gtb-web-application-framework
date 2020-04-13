@@ -10,7 +10,12 @@ class TesterController extends Controller
     public function index()
     {
         $route = $this->getRoute();
-        return view('tester/index', ['route' => $route]);
+        return view('tester/index', [
+            'route' => $route,
+            'method'  => '',
+            'uri'     => '',
+            'params'  => '',
+        ]);
     }
 
     public function exec(Request $request)
