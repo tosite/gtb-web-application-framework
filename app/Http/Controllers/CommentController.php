@@ -26,7 +26,9 @@ class CommentController extends Controller
 
     public function update(Request $request, $id)
     {
-        return response()->json(['id' => 2, 'name' => 'tanako', 'content' => 'word!'], 200);
+        $comment = Comment::findOrFail($id);
+        $comment->fill($request->input())->save();
+        return response()->json($comment, 200);
     }
 
     public function destroy($id)
