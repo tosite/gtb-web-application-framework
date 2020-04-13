@@ -30,17 +30,10 @@
 
             <div class="col s7">
                 <h4 class="pink-text text-lighten-1">Result</h4>
-                @if (!empty($header))
+                @if (!empty($curl))
                 <div class="card" style="background: #202746;">
                     <div class="card-content white-text pt-0 bp-0" style="overflow-x: scroll">
-                        <pre><code class="code sh"># {{ $method }}{{ PHP_EOL }}{{ $command }}{{ PHP_EOL }}{{ $header }}</code></pre>
-                    </div>
-                </div>
-
-                @if (!empty($result))
-                <div class="card" style="background: #202746; max-height: 500px; overflow-y: scroll;">
-                    <div class="card-content white-text pt-0 bp-0" style="overflow-x: scroll">
-                        <pre><code class="code green-text text-lighten-2">{{ $result }}</code></pre>
+                        <pre><code class="code sh"># {{ $method }}{{ PHP_EOL }}{{ $command }}{{ PHP_EOL }}{{ $curl }}</code></pre>
                     </div>
                 </div>
                 @else
@@ -49,8 +42,6 @@
                         No response.
                     </div>
                 </div>
-                @endif
-            
                 @endif
             </div>
         </div>

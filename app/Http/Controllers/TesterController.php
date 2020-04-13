@@ -28,8 +28,7 @@ class TesterController extends Controller
         $res = $this->getCurlResponse($action, $url, $params);
         return view('tester/index', [
             'route'   => $route,
-            'header'  => implode(PHP_EOL, $res['curl']['header']),
-            'result'  => implode(PHP_EOL, $res['curl']['result']),
+            'curl'    => implode(PHP_EOL, $res['curl']),
             'method'  => $action,
             'uri'     => $uri,
             'params'  => $params,
@@ -65,8 +64,7 @@ class TesterController extends Controller
 
     private function execCurl($command)
     {
-        exec($command . ' -I', $header);
-        exec($command, $result);
-        return ['header' => $header, 'result' => $result];
+        exec($command . ' -i', $header);
+        return $header;
     }
 }
