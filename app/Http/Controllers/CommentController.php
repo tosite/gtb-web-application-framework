@@ -21,7 +21,7 @@ class CommentController extends Controller
 
     public function show($id)
     {
-        return ['id' => 2, 'name' => 'tanaka', 'content' => 'world'];
+        return Comment::findOrFail($id);
     }
 
     public function update(Request $request, $id)
