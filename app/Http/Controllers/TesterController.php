@@ -11,10 +11,10 @@ class TesterController extends Controller
     {
         $route = $this->getRoute();
         return view('tester/index', [
-            'route' => $route,
-            'method'  => '',
-            'uri'     => '',
-            'params'  => '',
+            'route'  => $route,
+            'method' => '',
+            'uri'    => '',
+            'params' => '',
         ]);
     }
 
@@ -39,7 +39,7 @@ class TesterController extends Controller
     private function getRoute()
     {
         \Artisan::call('route:list');
-        return\Artisan::Output();
+        return \Artisan::Output();
     }
 
     private function getCurlResponse($method, $url = '', $params = '')
@@ -64,7 +64,12 @@ class TesterController extends Controller
 
     private function execCurl($command)
     {
+        $br = PHP_EOL;
         exec($command . ' -i', $header);
-        return $header;
+        return str_replace('[', "[{$br}  ",
+            str_replace(']', "{$br}]",
+                str_replace('},', "},{$br}  ", $header)
+            )
+        );
     }
 }
