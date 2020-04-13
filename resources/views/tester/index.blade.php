@@ -8,6 +8,7 @@
     .code {
         font-family: "Courier New", Consolas, monospace;
     }
+
     #tab-tester .tabs-content .carousel .carousel-slider {
         height: 80vh;
     }
@@ -29,18 +30,27 @@
 
             <div class="col s7">
                 <h4 class="pink-text text-lighten-1">Result</h4>
-                @if (!empty($result))
+                @if (!empty($header))
                 <div class="card" style="background: #202746;">
                     <div class="card-content white-text pt-0 bp-0" style="overflow-x: scroll">
                         <pre><code class="code sh"># {{ $method }}{{ PHP_EOL }}{{ $command }}{{ PHP_EOL }}{{ $header }}</code></pre>
                     </div>
                 </div>
 
+                @if (!empty($result))
                 <div class="card" style="background: #202746; max-height: 500px; overflow-y: scroll;">
                     <div class="card-content white-text pt-0 bp-0" style="overflow-x: scroll">
                         <pre><code class="code green-text text-lighten-2">{{ $result }}</code></pre>
                     </div>
                 </div>
+                @else
+                <div class="card yellow lighten-2">
+                    <div class="card-content amber-text text-darken-2">
+                        No response.
+                    </div>
+                </div>
+                @endif
+            
                 @endif
             </div>
         </div>
@@ -63,5 +73,7 @@
 
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();const el = document.getElementById('tabs');const instance = M.Tabs.init(el);</script>
+<script>hljs.initHighlightingOnLoad();
+  const el = document.getElementById('tabs');
+  const instance = M.Tabs.init(el);</script>
 @endsection
