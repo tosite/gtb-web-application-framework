@@ -32,11 +32,11 @@
             <div class="row">
                 <div class="col s12">
                     <b class="pink-text text-lighten-1">Parameters</b>
-                    <a class="waves-effect waves-liighr btn-floating btn-small pink" onclick="addInput();"><i class="material-icons">add</i></a>
+                    <a class="waves-effect waves-liight btn-floating btn-small pink" onclick="addInput();"><i class="material-icons">add</i></a>
                 </div>
                 <div id="parameter-inputs">
                     @if (empty($params['key']))
-                    <div class="key-value-input">
+                    <div class="key-value-input" id="key-value-input-1">
                         <div class="input-field col s6">
                             <input id="key-1" name="key[]" type="text">
                             <label for="key-1">key</label>
@@ -48,14 +48,17 @@
                     </div>
                     @else
                     @foreach($params['key'] as $i => $key)
-                    <div class="key-value-input">
-                        <div class="input-field col s6">
+                    <div class="key-value-input" id="key-value-input-{{ $i }}">
+                        <div class="input-field col s5">
                             <input id="key-1" name="key[]" type="text" value="{{ $params['key'][$i] }}">
                             <label for="key-1">key</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s5">
                             <input id="value-1" name="value[]" type="text" value="{{ $params['value'][$i] }}">
                             <label for="value-1">value</label>
+                        </div>
+                        <div class="col s2" style="text-align: center; padding-top: 15px;">
+                            <a class="waves-effect waves-red btn-flat" onclick="deleteInput({{ $i }})"><i class="material-icons">delete</i></a>
                         </div>
                     </div>
                     @endforeach

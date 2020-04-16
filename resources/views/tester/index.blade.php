@@ -77,18 +77,27 @@
   function addInput() {
     const nextId = document.querySelectorAll('.key-value-input').length + 1;
     const dom = '' +
-      '<div class="input-field col s6">' +
-      `    <input id="key-${nextId}" name="key[]" type="text" value="1">` +
+      '<div class="input-field col s5">' +
+      `    <input id="key-${nextId}" name="key[]" type="text">` +
       `    <label for="key-${nextId}">key</label>` +
       '</div>' +
-      '<div class="input-field col s6">' +
-      `    <input id="value-${nextId}" name="value[]" type="text" value="1">` +
+      '<div class="input-field col s5">' +
+      `    <input id="value-${nextId}" name="value[]" type="text">` +
       `    <label for="value-${nextId}">value</label>` +
+      '</div>' +
+      '<div class="col s2" style="text-align: center; padding-top: 15px;">' +
+      `    <a class="waves-effect waves-red btn-flat" onclick="deleteInput(${nextId})"><i class="material-icons">delete</i></a>` +
       '</div>';
     const div = document.createElement('div');
     div.classList.add('key-value-input');
+    div.id = `key-value-input-${nextId}`;
     div.innerHTML = dom;
     document.getElementById('parameter-inputs').appendChild(div);
+  }
+
+  function deleteInput(id) {
+    const dom = document.getElementById(`key-value-input-${id}`);
+    dom.parentNode.removeChild(dom);
   }
 </script>
 @endsection
