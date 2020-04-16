@@ -12,6 +12,11 @@
     #tab-tester .tabs-content .carousel .carousel-slider {
         height: 80vh;
     }
+
+    .key-value-input .input-field {
+        margin: 0;
+        margin-top: 10px;
+    }
 </style>
 @endsection
 
@@ -64,7 +69,26 @@
 
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();
+<script>
+  hljs.initHighlightingOnLoad();
   const el = document.getElementById('tabs');
-  const instance = M.Tabs.init(el);</script>
+  const instance = M.Tabs.init(el);
+
+  function addInput() {
+    const nextId = document.querySelectorAll('.key-value-input').length + 1;
+    const dom = '' +
+      '<div class="input-field col s6">' +
+      `    <input id="key-${nextId}" name="key-${nextId}" type="text">` +
+      `    <label for="key-${nextId}">key</label>` +
+      '</div>' +
+      '<div class="input-field col s6">' +
+      `    <input id="value-${nextId}" name="value-${nextId}" type="text">` +
+      `    <label for="value-${nextId}">value</label>` +
+      '</div>';
+    const div = document.createElement('div');
+    div.classList.add('key-value-input');
+    div.innerHTML = dom;
+    document.getElementById('parameter-inputs').appendChild(div);
+  }
+</script>
 @endsection

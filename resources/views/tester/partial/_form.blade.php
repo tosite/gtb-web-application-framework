@@ -19,16 +19,32 @@
                         <option value="delete" @if($method === 'delete') selected @endif>delete</option>
                     </select>
                 </div>
+            </div>
+
+            <div class="row">
                 <div class="col m6"></div>
                 <div class="input-field col s12">
                     <input id="uri" name="uri" type="text" class="validate" placeholder="/api/comments" value="{{ $uri }}">
                     <label for="uri">Uri</label>
                 </div>
-                <div class="col m6"></div>
-                <div class="input-field col s12">
-                    <input id="params" name="params" type="text" class="validate" value="{{ $params }}">
-                    <label for="params">Params</label>
-                    <span class="helper-text">Optional.</span>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <b class="pink-text text-lighten-1">Parameters</b>
+                    <a class="waves-effect waves-liighr btn-floating btn-small pink" onclick="addInput();"><i class="material-icons">add</i></a>
+                </div>
+                <div id="parameter-inputs">
+                    <div class="key-value-input">
+                        <div class="input-field col s6">
+                            <input id="key-1" name="key-1" type="text" value="{{ $params }}">
+                            <label for="key-1">key</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="value-1" name="value-1" type="text" value="{{ $params }}">
+                            <label for="value-1">value</label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
