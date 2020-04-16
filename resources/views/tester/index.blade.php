@@ -69,10 +69,15 @@
     <div id="swipe-3" class="col s12" style="70vh;">
         <div class="row">
             <div class="col s12">
-                <h4 class="pink-text text-lighten-1">Logs</h4>
+                <h4 class="pink-text text-lighten-1">
+                    Logs
+                    <a class="btn-floating btn-small waves-effect waves-light red" onclick="clearLog()">
+                        <i class="material-icons">delete</i>
+                    </a>
+                </h4>
                 <div class="card" style="background: #202746; overflow-x: scroll; max-height: 70vh;">
                     <div class="card-content white-text pt-0 bp-0">
-                        <pre><code class="code plaintext green-text text-lighten-2">{{ $log }}</code></pre>
+                        <pre><code class="code plaintext gray-text text-lighten-2" id="log">{{ $log }}</code></pre>
                     </div>
                 </div>
             </div>
@@ -112,6 +117,21 @@
   function deleteInput(id) {
     const dom = document.getElementById(`key-value-input-${id}`);
     dom.parentNode.removeChild(dom);
+  }
+
+  function clearLog() {
+    if (confirm('ログを削除してもよろしいですか？') === false) {
+      return;
+    }
+    const req = new XMLHttpRequest();
+    req.open("DELETE", '/api/logs', true);
+    req.onreadystatechange = function () {
+      if (req.readyState !== 4 || req.status !== 200) {
+        return;
+      }
+    };
+    req.send();
+    document.getElementById('log').textContent = '';
   }
 </script>
 @endsection

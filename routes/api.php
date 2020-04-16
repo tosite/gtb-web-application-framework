@@ -21,4 +21,8 @@ Route::middleware('auth:api')->group(function () {
 
 Route::middleware('api')->group(function () {
     Route::resource('comments', 'CommentController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+
+    Route::delete('logs', function () {
+        exec(': > ../storage/logs/laravel.log');
+    });
 });

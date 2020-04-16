@@ -40,7 +40,7 @@ class TesterController extends Controller
 
     private function getLog()
     {
-        return substr(file_get_contents('../storage/logs/laravel.log'), 0, 10000);
+        return file_get_contents('../storage/logs/laravel.log');
     }
 
     private function params($input)
