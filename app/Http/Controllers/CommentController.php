@@ -14,8 +14,10 @@ class CommentController extends Controller
 
     public function store(Request $request)
     {
-        $comment = new Comment();
-        $comment->fill($request->input())->save();
+        $comment = Comment::create([
+            'name'    => $request->input('name'),
+            'content' => $request->input('content'),
+        ]);
         return response()->json($comment, 201);
     }
 
@@ -27,7 +29,10 @@ class CommentController extends Controller
     public function update(Request $request, $id)
     {
         $comment = Comment::findOrFail($id);
-        $comment->fill($request->input())->save();
+        $comment->update([
+            'name'    => $request->input('name') ?: $comment->name,
+            'content' => $request->input('content') ?: $comment->content,
+        ]);
         return response()->json($comment, 200);
     }
 

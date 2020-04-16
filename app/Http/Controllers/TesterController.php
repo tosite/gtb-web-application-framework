@@ -38,6 +38,9 @@ class TesterController extends Controller
 
     private function params($input)
     {
+        if (!array_key_exists('key', $input)) {
+            return '';
+        }
         $strParam = '';
         foreach ($input['key'] as $i => $key) {
             $value = $input['value'][$i];
