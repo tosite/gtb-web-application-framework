@@ -13,16 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->group(function () {
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
-});
-
 Route::middleware('api')->group(function () {
-    Route::resource('comments', 'CommentController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
-
     Route::delete('logs', function () {
         exec(': > ../storage/logs/laravel.log');
     });
+    Route::get('comments', 'CommentController@index');
+    Route::get('comments/{comment}', 'CommentController@show');
+    Route::post('comments', 'CommentController@store');
+    Route::put('comments/{comment}', 'CommentController@update');
+    Route::patch('comments/{comment}', 'CommentController@update');
+    Route::delete('comments/{comment}', 'CommentController@destroy');
 });

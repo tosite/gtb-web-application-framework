@@ -37,9 +37,12 @@
             <div class="col s7">
                 <h4 class="pink-text text-lighten-1">Result</h4>
                 @if (!empty($curl))
-                <div class="card" style="background: #202746; overflow-x: scroll; max-height: 70vh;">
-                    <div class="card-content white-text pt-0 bp-0">
-                        <pre><code class="code sh"># {{ $method }}{{ PHP_EOL }}{{ $command }}{{ PHP_EOL }}{{ $curl }}</code></pre>
+                <div class="card" style="background: #202746;">
+                    <div class="card-content white-text pt-0 bp-0" style="overflow-x: scroll">
+                        <pre><code class="code sh"># {{ $method }}{{ PHP_EOL }}{{ $command }}{{ PHP_EOL }}{{ $curl }}@if (!empty($repsonse)) {{ $response }} @endif</code></pre>
+                        @if (!empty($json) && $json !== 'null')
+                        <pre><code class="code sh">{{ $json }}</code></pre>
+                        @endif
                     </div>
                 </div>
                 @else
