@@ -20,11 +20,11 @@ class TesterController extends Controller
 
     public function exec(Request $request)
     {
+        $params = $this->params($request->input());
         $route = $this->getRoute();
         $action = $request->input('action');
         $uri = $request->input('uri');
         $url = request()->getSchemeAndHttpHost() . (empty($uri) ? '' : $uri);
-        $params = $request->input('params');
         $res = $this->getCurlResponse($action, $url, $params);
         $response = json_decode(implode(PHP_EOL, $res['curl']['response']));
         return view('tester/index', [
@@ -33,9 +33,27 @@ class TesterController extends Controller
             'json'    => json_encode($response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
             'method'  => $action,
             'uri'     => $uri,
-            'params'  => $params,
+            'params'  => $request->input(),
             'command' => $res['command'],
         ]);
+    }
+
+    private function params($input)
+    {
+        if (!array_key_exists('key', $input)) {
+            return '';
+        }
+        $strParam = '';
+        foreach ($input['key'] as $i => $key) {
+            $value = $input['value'][$i];
+            if (!empty($key) && !empty($value)) {
+                $strParam .= "{$key}={$value}&";
+            }
+        }
+        if (strlen($strParam) !== 0) {
+            $strParam = substr($strParam, 0, -1);
+        }
+        return $strParam;
     }
 
     private function getRoute()
