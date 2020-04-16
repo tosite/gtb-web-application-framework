@@ -10,7 +10,7 @@
     }
 
     #tab-tester .tabs-content .carousel .carousel-slider {
-        height: 80vh;
+        height: 70vh;
     }
 
     .key-value-input .input-field {
@@ -24,6 +24,7 @@
 <ul id="tabs" class="tabs">
     <li class="tab col s3"><a href="#swipe-1" class="active">API</a></li>
     <li class="tab col s3"><a href="#swipe-2">Route</a></li>
+    <li class="tab col s3"><a href="#swipe-3">Log</a></li>
 </ul>
 <div id="tab-tester" style="padding: 10px;">
     <div id="swipe-1" class="col s12">
@@ -36,8 +37,8 @@
             <div class="col s7">
                 <h4 class="pink-text text-lighten-1">Result</h4>
                 @if (!empty($curl))
-                <div class="card" style="background: #202746;">
-                    <div class="card-content white-text pt-0 bp-0" style="overflow-x: scroll">
+                <div class="card" style="background: #202746; overflow-x: scroll; max-height: 70vh;">
+                    <div class="card-content white-text pt-0 bp-0">
                         <pre><code class="code sh"># {{ $method }}{{ PHP_EOL }}{{ $command }}{{ PHP_EOL }}{{ $curl }}</code></pre>
                     </div>
                 </div>
@@ -56,9 +57,22 @@
         <div class="row">
             <div class="col s12">
                 <h4 class="pink-text text-lighten-1">Routes</h4>
-                <div class="card" style="background: #202746;">
-                    <div class="card-content white-text pt-0 bp-0" style="overflow-x: scroll">
+                <div class="card" style="background: #202746; overflow-x: scroll; max-height: 70vh;">
+                    <div class="card-content white-text pt-0 bp-0">
                         <pre><code class="code plaintext green-text text-lighten-2">{{ $route }}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="swipe-3" class="col s12" style="70vh;">
+        <div class="row">
+            <div class="col s12">
+                <h4 class="pink-text text-lighten-1">Logs</h4>
+                <div class="card" style="background: #202746; overflow-x: scroll; max-height: 70vh;">
+                    <div class="card-content white-text pt-0 bp-0">
+                        <pre><code class="code plaintext green-text text-lighten-2">{{ $log }}</code></pre>
                     </div>
                 </div>
             </div>

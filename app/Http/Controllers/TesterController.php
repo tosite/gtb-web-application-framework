@@ -15,6 +15,7 @@ class TesterController extends Controller
             'method' => '',
             'uri'    => '',
             'params' => '',
+            'log'    => $this->getLog(),
         ]);
     }
 
@@ -33,7 +34,13 @@ class TesterController extends Controller
             'uri'     => $uri,
             'params'  => $request->input(),
             'command' => $res['command'],
+            'log'     => $this->getLog(),
         ]);
+    }
+
+    private function getLog()
+    {
+        return substr(file_get_contents('../storage/logs/laravel.log'), 0, 10000);
     }
 
     private function params($input)
