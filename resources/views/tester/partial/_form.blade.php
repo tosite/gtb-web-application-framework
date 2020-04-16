@@ -35,16 +35,31 @@
                     <a class="waves-effect waves-liighr btn-floating btn-small pink" onclick="addInput();"><i class="material-icons">add</i></a>
                 </div>
                 <div id="parameter-inputs">
+                    @if (empty($params['key']))
                     <div class="key-value-input">
                         <div class="input-field col s6">
-                            <input id="key-1" name="key-1" type="text" value="{{ $params }}">
+                            <input id="key-1" name="key[]" type="text">
                             <label for="key-1">key</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="value-1" name="value-1" type="text" value="{{ $params }}">
+                            <input id="value-1" name="value[]" type="text">
                             <label for="value-1">value</label>
                         </div>
                     </div>
+                    @else
+                    @foreach($params['key'] as $i => $key)
+                    <div class="key-value-input">
+                        <div class="input-field col s6">
+                            <input id="key-1" name="key[]" type="text" value="{{ $params['key'][$i] }}">
+                            <label for="key-1">key</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="value-1" name="value[]" type="text" value="{{ $params['value'][$i] }}">
+                            <label for="value-1">value</label>
+                        </div>
+                    </div>
+                    @endforeach
+                    @endif
                 </div>
             </div>
         </div>

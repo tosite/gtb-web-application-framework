@@ -78,11 +78,11 @@
     const nextId = document.querySelectorAll('.key-value-input').length + 1;
     const dom = '' +
       '<div class="input-field col s6">' +
-      `    <input id="key-${nextId}" name="key-${nextId}" type="text">` +
+      `    <input id="key-${nextId}" name="key[]" type="text" value="1">` +
       `    <label for="key-${nextId}">key</label>` +
       '</div>' +
       '<div class="input-field col s6">' +
-      `    <input id="value-${nextId}" name="value-${nextId}" type="text">` +
+      `    <input id="value-${nextId}" name="value[]" type="text" value="1">` +
       `    <label for="value-${nextId}">value</label>` +
       '</div>';
     const div = document.createElement('div');

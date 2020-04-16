@@ -20,20 +20,35 @@ class TesterController extends Controller
 
     public function exec(Request $request)
     {
+        $params = $this->params($request->input());
         $route = $this->getRoute();
         $action = $request->input('action');
         $uri = $request->input('uri');
         $url = request()->getSchemeAndHttpHost() . (empty($uri) ? '' : $uri);
-        $params = $request->input('params');
         $res = $this->getCurlResponse($action, $url, $params);
         return view('tester/index', [
             'route'   => $route,
             'curl'    => implode(PHP_EOL, $res['curl']),
             'method'  => $action,
             'uri'     => $uri,
-            'params'  => $params,
+            'params'  => $request->input(),
             'command' => $res['command'],
         ]);
+    }
+
+    private function params($input)
+    {
+        $strParam = '';
+        foreach ($input['key'] as $i => $key) {
+            $value = $input['value'][$i];
+            if (!empty($key) && !empty($value)) {
+                $strParam .= "{$key}={$value}&";
+            }
+        }
+        if (strlen($strParam) !== 0) {
+            $strParam = substr($strParam, 0, -1);
+        }
+        return $strParam;
     }
 
     private function getRoute()
