@@ -10,7 +10,7 @@
     }
 
     #tab-tester .tabs-content .carousel .carousel-slider {
-        height: 80vh;
+        height: 70vh;
     }
 
     .key-value-input .input-field {
@@ -24,6 +24,7 @@
 <ul id="tabs" class="tabs">
     <li class="tab col s3"><a href="#swipe-1" class="active">API</a></li>
     <li class="tab col s3"><a href="#swipe-2">Route</a></li>
+    <li class="tab col s3"><a href="#swipe-3">Log</a></li>
 </ul>
 <div id="tab-tester" style="padding: 10px;">
     <div id="swipe-1" class="col s12">
@@ -59,9 +60,27 @@
         <div class="row">
             <div class="col s12">
                 <h4 class="pink-text text-lighten-1">Routes</h4>
-                <div class="card" style="background: #202746;">
-                    <div class="card-content white-text pt-0 bp-0" style="overflow-x: scroll">
+                <div class="card" style="background: #202746; overflow-x: scroll; max-height: 70vh;">
+                    <div class="card-content white-text pt-0 bp-0">
                         <pre><code class="code plaintext green-text text-lighten-2">{{ $route }}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="swipe-3" class="col s12" style="70vh;">
+        <div class="row">
+            <div class="col s12">
+                <h4 class="pink-text text-lighten-1">
+                    Logs
+                    <a class="btn-floating btn-small waves-effect waves-light red" onclick="clearLog()">
+                        <i class="material-icons">delete</i>
+                    </a>
+                </h4>
+                <div class="card" style="background: #202746; overflow-x: scroll; max-height: 70vh;">
+                    <div class="card-content white-text pt-0 bp-0">
+                        <pre><code class="code plaintext gray-text text-lighten-2" id="log">{{ $log }}</code></pre>
                     </div>
                 </div>
             </div>
@@ -101,6 +120,21 @@
   function deleteInput(id) {
     const dom = document.getElementById(`key-value-input-${id}`);
     dom.parentNode.removeChild(dom);
+  }
+
+  function clearLog() {
+    if (confirm('ログを削除してもよろしいですか？') === false) {
+      return;
+    }
+    const req = new XMLHttpRequest();
+    req.open("DELETE", '/api/logs', true);
+    req.onreadystatechange = function () {
+      if (req.readyState !== 4 || req.status !== 200) {
+        return;
+      }
+    };
+    req.send();
+    document.getElementById('log').textContent = '';
   }
 </script>
 @endsection
