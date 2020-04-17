@@ -65,8 +65,8 @@ class TesterController extends Controller
 
     private function getRoute()
     {
-        \Artisan::call('route:list');
-        return \Artisan::Output();
+        exec('cd ..; php artisan route:list', $res);
+        return implode(PHP_EOL, $res);
     }
 
     private function getCurlResponse($method, $url = '', $params = '')
