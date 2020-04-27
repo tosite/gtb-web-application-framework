@@ -1,6 +1,5 @@
 ### gtb2020-laravelをConohaで使えるよう初期化セットアップします。
 
-# composer install
 composer install
 
 # .envを作成する
@@ -12,10 +11,10 @@ sudo cp -b -f ./setup/httpd/conf/httpd.conf /etc/httpd/conf/
 # Apache再起動
 service httpd restart
 
-# logにアクセスする為に権限を付与させる
+# logにアクセスする為に権限を付与する
 chown apache:apache /var/www/html/gtb2020-laravel/storage/logs/
 
-# gtb2020-laravelディレクトリの権限を変更させる
+# gtb2020-laravelディレクトリの権限を変更する
 chmod -R 777 /var/www/html/gtb2020-laravel
 
 # APP KEYを生成させる
