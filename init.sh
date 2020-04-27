@@ -4,10 +4,10 @@
 composer install
 
 # .envを作成する
-cp ../.env.example .env
+cp .env.example .env
 
 # httpd.confを上書きさせる。-bオプションで上書き元はバックアップする
-sudo cp -b -f httpd/conf/httpd.conf /etc/httpd/conf/
+sudo cp -b -f ./setup/httpd/conf/httpd.conf /etc/httpd/conf/
 
 # Apache再起動
 service httpd restart
