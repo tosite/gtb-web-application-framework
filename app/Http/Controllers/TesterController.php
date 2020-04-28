@@ -9,9 +9,7 @@ class TesterController extends Controller
 
     public function index()
     {
-        $route = $this->getRoute();
         return view('tester/index', [
-            'route'  => $route,
             'method' => '',
             'uri'    => '',
             'params' => '',
@@ -21,14 +19,12 @@ class TesterController extends Controller
     public function exec(Request $request)
     {
         $params = $this->params($request->input());
-        $route = $this->getRoute();
         $action = $request->input('action');
         $uri = $request->input('uri');
         $url = request()->getSchemeAndHttpHost() . (empty($uri) ? '' : $uri);
         $res = $this->getCurlResponse($action, $url, $params);
         $response = json_decode(implode(PHP_EOL, $res['curl']['response']));
         return view('tester/index', [
-            'route'   => $route,
             'curl'    => implode(PHP_EOL, $res['curl']['header']),
             'json'    => json_encode($response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
             'method'  => $action,
@@ -54,12 +50,6 @@ class TesterController extends Controller
             $strParam = substr($strParam, 0, -1);
         }
         return $strParam;
-    }
-
-    private function getRoute()
-    {
-        exec('cd ..; php artisan route:list', $res);
-        return implode(PHP_EOL, $res);
     }
 
     private function getCurlResponse($method, $url = '', $params = '')
