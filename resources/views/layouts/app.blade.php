@@ -18,7 +18,7 @@
 <body>
 <nav>
     <div class="nav-wrapper blue darken-2">
-        <a href="#" class="brand-logo" style="margin-left: 10px;">GTB2020</a>
+        <a href="/" class="brand-logo" style="margin-left: 10px;">GTB2020</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
 <!--            <li><a href="sass.html">Sass</a></li>-->
         </ul>
