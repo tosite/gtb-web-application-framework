@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Comments;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class Post extends FormRequest
