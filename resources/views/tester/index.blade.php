@@ -129,7 +129,7 @@
   }
 
   function clearLog() {
-    if (confirm('ログを削除してもよろしいですか？') === false) {
+    if (confirm('would you like me to delete the all logs?') === false) {
       return;
     }
     const req = new XMLHttpRequest();
