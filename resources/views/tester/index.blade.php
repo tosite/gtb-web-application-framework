@@ -24,7 +24,7 @@
 <ul id="tabs" class="tabs">
     <li class="tab col s3"><a href="#swipe-1" class="active">API</a></li>
     <li class="tab col s3"><a href="#swipe-2">Route</a></li>
-    <li class="tab col s3"><a href="#swipe-3">Log</a></li>
+    <li class="tab col s3"><a href="#swipe-3" onclick="getLog()">Log</a></li>
 </ul>
 <div id="tab-tester" style="padding: 10px;">
     <div id="swipe-1" class="col s12">
@@ -78,9 +78,10 @@
                         <i class="material-icons">delete</i>
                     </a>
                 </h4>
-                <div class="card" style="background: #202746; overflow-x: scroll; max-height: 70vh;">
+                <div class="progress" id="log-loader"><div class="indeterminate"></div></div>
+                <div class="card" style="background: #202746; overflow-x: scroll; max-height: 70vh; display: none;" id="log-wrapper">
                     <div class="card-content white-text pt-0 bp-0">
-                        <pre><code class="code plaintext gray-text text-lighten-2" id="log">{{ $log }}</code></pre>
+                        <pre><code class="code plaintext gray-text text-lighten-2" id="log"></code></pre>
                     </div>
                 </div>
             </div>
@@ -135,6 +136,20 @@
     };
     req.send();
     document.getElementById('log').textContent = '';
+  }
+
+  function getLog() {
+    const req = new XMLHttpRequest();
+    req.open("GET", '/api/logs', true);
+    req.onreadystatechange = function () {
+      if (req.readyState !== 4 || req.status !== 200) {
+        return;
+      }
+      document.getElementById('log').textContent = req.response;
+      document.getElementById('log-wrapper').style.display = 'block';
+      document.getElementById('log-loader').style.display = 'none';
+    };
+    req.send();
   }
 </script>
 @endsection
