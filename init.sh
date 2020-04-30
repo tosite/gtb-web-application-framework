@@ -20,3 +20,6 @@ chmod -R 777 /var/www/html/gtb2020-laravel/bootstrap/cache
 
 # APP KEYを生成させる
 php artisan key:generate
+
+# Coonoha VPS上で問題なくマイグレーションできるようにAppServiceProviderを上書きする
+sudo cp -f ./setup/app/Providers/AppServiceProvider.php ./app/Providers/ 
