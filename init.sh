@@ -15,7 +15,8 @@ service httpd restart
 chown apache:apache /var/www/html/gtb2020-laravel/storage/logs/
 
 # gtb2020-laravelディレクトリの権限を変更する
-chmod -R 777 /var/www/html/gtb2020-laravel
+chmod -R 777 /var/www/html/gtb2020-laravel/storage
+chmod -R 777 /var/www/html/gtb2020-laravel/bootstrap/cache
 
 # APP KEYを生成させる
 php artisan key:generate
