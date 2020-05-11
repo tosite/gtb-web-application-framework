@@ -15,7 +15,7 @@
                         <option value="" disabled selected>Choose Methods</option>
                         <option value="get" @if($method === 'get') selected @endif>get</option>
                         <option value="post" @if($method === 'post') selected @endif>post</option>
-                        <option value="put" @if($method === 'put') selected @endif>put/patch</option>
+                        <option value="put" @if($method === 'put') selected @endif>put</option>
                         <option value="delete" @if($method === 'delete') selected @endif>delete</option>
                     </select>
                 </div>
