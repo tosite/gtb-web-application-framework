@@ -6,7 +6,12 @@ Route::middleware('api')->group(function () {
     });
 
     Route::get('logs', function () {
-        return file_get_contents('../storage/logs/laravel.log');
+        try {
+            $res = file_get_contents('../storage/logs/laravel.log');
+        } catch (\Exception $e) {
+            $res = null;
+        }
+        return $res;
     });
 
     Route::get('routes', function () {
