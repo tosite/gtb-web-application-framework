@@ -15,6 +15,10 @@ Route::get('/', function () {
     return redirect('/tester');
 });
 
+Route::get('/test', function () {
+    return view('welcome');
+});
+
 Route::prefix('tester')->group(function () {
     Route::get('', 'TesterController@index');
     Route::post('', 'TesterController@exec');
