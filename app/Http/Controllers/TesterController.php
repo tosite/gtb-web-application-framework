@@ -23,7 +23,7 @@ class TesterController extends Controller
         $uri = $request->input('uri');
         $url = request()->getSchemeAndHttpHost() . (empty($uri) ? '' : $uri);
         $res = $this->getCurlResponse($action, $url, $params);
-        $response = json_decode(implode(PHP_EOL, $res['curl']['response']));
+        $response = json_decode($res['curl']['response']);
         return view('tester/index', [
             'curl'    => implode(PHP_EOL, $res['curl']['header']),
             'json'    => json_encode($response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
@@ -75,7 +75,7 @@ class TesterController extends Controller
     private function execCurl($command)
     {
         exec($command . ' -i', $header);
-        exec($command, $response);
+        $response = $header[count($header) - 1];
         return ['header' => $header, 'response' => $response];
     }
 }

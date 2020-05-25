@@ -6,7 +6,8 @@ Route::middleware('api')->group(function () {
     });
 
     Route::get('logs', function () {
-        return file_get_contents('../storage/logs/laravel.log');
+        $logPath = '../storage/logs/laravel.log';
+        return (file_exists($logPath)) ? file_get_contents($logPath) : null;
     });
 
     Route::get('routes', function () {
