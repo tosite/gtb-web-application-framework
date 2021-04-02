@@ -11,6 +11,7 @@ services:
             DB_USERNAME: root
             DB_PASSWORD: root
             TZ: 'Asia/Tokyo'
+            DOCKER: 1
         volumes:
             - ./:/var/www
     nginx:
