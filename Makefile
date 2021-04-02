@@ -1,3 +1,5 @@
+SUCCESS_COLOR=\033[1;32m
+WARN_COLOR=\033[1;33m
 INFO_COLOR=\033[1;34m
 RESET=\033[0m
 BOLD=\033[1m
@@ -6,7 +8,9 @@ setup/docker:
 	cp .env.example .env
 	docker-compose up -d
 	docker-compose run php bash -c "composer install && php artisan key:generate && make db/setup"
-	@echo "$(INFO_COLOR)コンテナを停止したい場合は 'make stop/docker' を入力してください。$(RESET)"
+	@echo "$(INFO_COLOR)Setup is finished🎉$(RESET)"
+	@echo "$(INFO_COLOR)Enjoy your development!!🥳$(RESET)"
+	@echo "$(WARN_COLOR)If you want to stop the container, enter 'make stop/docker'.$(RESET)"
 
 setup/conoha:
 	cp .env.example .env
@@ -16,6 +20,8 @@ setup/conoha:
 	chmod -R 777 /var/www/html/gtb2020-laravel/storage && chmod -R 777 /var/www/html/gtb2020-laravel/bootstrap/cache
 	sudo cp -f ./setup/app/Providers/AppServiceProvider.php ./app/Providers/
 	service httpd restart
+	@echo "$(INFO_COLOR)Setup is finished🎉$(RESET)"
+	@echo "$(INFO_COLOR)Enjoy your development!!🥳$(RESET)"
 
 db/setup:
 	mysql -u${DB_USERNAME} -p${DB_PASSWORD} -h${DB_HOST} -e 'create database if not exists ${DB_DATABASE};'
@@ -26,16 +32,16 @@ stop/docker:
 
 start/docker:
 	docker-compose up -d
-	@echo "$(INFO_COLOR)コンテナを停止したい場合は 'make stop/docker' を入力してください。$(RESET)"
+	@echo "$(WARN_COLOR)If you want to stop the container, enter 'make stop/docker'.$(RESET)"
 
 log/php:
-	@echo "$(INFO_COLOR)コンソールに戻りたい場合は 'ctrl+C' を入力してください。$(RESET)"
+	@echo "$(WARN_COLOR)If you wnat to return to the console, enter 'ctrl+C'.$(RESET)"
 	docker-compose logs -f php
 
 log/nginx:
-	@echo "$(INFO_COLOR)コンソールに戻りたい場合は 'ctrl+C' を入力してください。$(RESET)"
+	@echo "$(WARN_COLOR)If you wnat to return to the console, enter 'ctrl+C'.$(RESET)"
 	docker-compose logs -f nginx
 
 log/db:
-	@echo "$(INFO_COLOR)コンソールに戻りたい場合は 'ctrl+C' を入力してください。$(RESET)"
+	@echo "$(WARN_COLOR)If you wnat to return to the console, enter 'ctrl+C'.$(RESET)"
 	docker-comose logs -f mysql
