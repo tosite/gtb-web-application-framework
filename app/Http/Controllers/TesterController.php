@@ -21,7 +21,8 @@ class TesterController extends Controller
         $params = $this->params($request->input());
         $action = $request->input('action');
         $uri = $request->input('uri');
-        $url = request()->getSchemeAndHttpHost() . (empty($uri) ? '' : $uri);
+        $host = (int)env('DOCKER', 0) === 1 ? 'http://host.docker.internal' : request()->getSchemeAndHttpHost();
+        $url = $host . (empty($uri) ? '' : $uri);
         $res = $this->getCurlResponse($action, $url, $params);
         $response = json_decode($res['curl']['response']);
         return view('tester/index', [
