@@ -16,8 +16,8 @@ setup/conoha:
 	cp .env.example .env
 	composer install && php artisan key:generate && make db/setup
 	sudo cp -b -f ./setup/httpd/conf/httpd.conf /etc/httpd/conf/
-	chown apache:apache /var/www/html/gtb2020-laravel/storage/logs/
-	chmod -R 777 /var/www/html/gtb2020-laravel/storage && chmod -R 777 /var/www/html/gtb2020-laravel/bootstrap/cache
+	chown apache:apache /var/www/html/gtb-web-application-framework/storage/logs/
+	chmod -R 777 /var/www/html/gtb-web-application-framework/storage && chmod -R 777 /var/www/html/gtb-web-application-framework/bootstrap/cache
 	sudo cp -f ./setup/app/Providers/AppServiceProvider.php ./app/Providers/
 	service httpd restart
 	@echo "$(INFO_COLOR)Setup is finished🎉$(RESET)"

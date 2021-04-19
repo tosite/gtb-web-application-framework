@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>GTB2020 - @yield('title')</title>
+    <title>@yield('title') | GTB Web Application Framework</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -18,7 +18,7 @@
 <body>
 <nav>
     <div class="nav-wrapper blue darken-2">
-        <a href="/" class="brand-logo" style="margin-left: 10px;">GTB2020</a>
+        <a href="/" class="brand-logo" style="margin-left: 10px;">GTB Web Application Framework</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
 <!--            <li><a href="sass.html">Sass</a></li>-->
         </ul>
