@@ -4,7 +4,8 @@
 
 ### 前提
 dockerを使って開発環境を作ります。
-[Docker Desktop for Mac](https://docs.docker.com/docker-for-mac) をインストールして、dockerを使える状態にしておいてください。
+[Docker Desktop for Mac](https://docs.docker.com/docker-for-mac) をインストールして、dockerを使える状態にしておいてください。  
+事前に[docker login](https://docs.docker.jp/engine/reference/commandline/login.html)まで済ませてください。
 
 ### setup（初回起動時）
 
