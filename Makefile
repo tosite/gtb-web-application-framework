@@ -14,6 +14,8 @@ setup/docker:
 
 setup/conoha:
 	cp .env.example .env
+	$(eval MYSQL_PASS=$(shell sed -n 7p /etc/motd | cut -d " " -f 3))
+	@sed -i '/DB_PASSWORD=/s/$$/$(MYSQL_PASS)/g' .env
 	composer install && php artisan key:generate && make db/setup
 	sudo cp -b -f ./setup/httpd/conf/httpd.conf /etc/httpd/conf/
 	chown apache:apache /var/www/html/gtb-web-application-framework/storage/logs/
