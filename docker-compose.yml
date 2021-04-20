@@ -4,12 +4,7 @@ services:
     php:
         build: ./docker/php
         environment:
-            DB_HOST: mysql
-            DB_PORT: 3306
-            DB_DATABASE: laravel
             DB_DATABASE_TEST: laravel_test
-            DB_USERNAME: root
-            DB_PASSWORD: root
             TZ: 'Asia/Tokyo'
             DOCKER: 1
         volumes:
