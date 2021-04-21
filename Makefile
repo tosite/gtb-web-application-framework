@@ -6,8 +6,8 @@ BOLD=\033[1m
 
 setup/docker:
 	cp .env.example .env
-	@sed -i 's/DB_HOST=127.0.0.1/DB_HOST=mysql/' .env
-	@sed -i 's/DB_PASSWORD=/DB_PASSWORD=root/' .env
+	@sed -i -e 's/^DB_HOST=127.0.0.1$$/DB_HOST=mysql/' .env
+	@sed -i -e 's/^DB_PASSWORD=$$/DB_PASSWORD=root/' .env
 	docker-compose up -d
 	docker-compose run php bash -c "composer install && php artisan key:generate && make db/setup"
 	@echo "$(INFO_COLOR)Setup is finished🎉$(RESET)"
@@ -17,8 +17,8 @@ setup/docker:
 setup/conoha:
 	cp .env.example .env
 	$(eval MYSQL_PASS=$(shell sed -n 7p /etc/motd | cut -d " " -f 3))
-	@sed -i 's/DB_HOST=127.0.0.1/DB_HOST=localhost/' .env
-	@sed -i 's/DB_PASSWORD=/DB_PASSWORD=$(MYSQL_PASS)/' .env
+	@sed -i -e 's/^DB_HOST=127.0.0.1$$/DB_HOST=localhost/' .env
+	@sed -i -e 's/^DB_PASSWORD=$$/DB_PASSWORD=$(MYSQL_PASS)/' .env
 	composer install && php artisan key:generate && make db/setup
 	sudo cp -b -f ./setup/httpd/conf/httpd.conf /etc/httpd/conf/
 	chown apache:apache /var/www/html/gtb-web-application-framework/storage/logs/
