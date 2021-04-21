@@ -6,6 +6,8 @@ BOLD=\033[1m
 
 setup/docker:
 	cp .env.example .env
+	@sed -i -e 's/^DB_HOST=127.0.0.1$$/DB_HOST=mysql/' .env
+	@sed -i -e 's/^DB_PASSWORD=$$/DB_PASSWORD=root/' .env
 	docker-compose up -d
 	docker-compose run php bash -c "composer install && php artisan key:generate && make db/setup"
 	@echo "$(INFO_COLOR)Setup is finished🎉$(RESET)"
@@ -14,6 +16,9 @@ setup/docker:
 
 setup/conoha:
 	cp .env.example .env
+	$(eval MYSQL_PASS=$(shell sed -n 7p /etc/motd | cut -d " " -f 3))
+	@sed -i -e 's/^DB_HOST=127.0.0.1$$/DB_HOST=localhost/' .env
+	@sed -i -e 's/^DB_PASSWORD=$$/DB_PASSWORD=$(MYSQL_PASS)/' .env
 	composer install && php artisan key:generate && make db/setup
 	sudo cp -b -f ./setup/httpd/conf/httpd.conf /etc/httpd/conf/
 	chown apache:apache /var/www/html/gtb-web-application-framework/storage/logs/
@@ -24,6 +29,8 @@ setup/conoha:
 	@echo "$(INFO_COLOR)Enjoy your development!!🥳$(RESET)"
 
 db/setup:
+	$(eval include .env)
+	$(eval export sed 's/=.*//' .env)
 	mysql -u${DB_USERNAME} -p${DB_PASSWORD} -h${DB_HOST} -e 'create database if not exists ${DB_DATABASE};'
 	php artisan migrate
 
