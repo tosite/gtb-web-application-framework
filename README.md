@@ -37,7 +37,7 @@ make log/db
 
 ## ConoHa VPSでのセットアップ
 
-必ず`var/www/html`上で実行してください。
+必ず `var/www/html` 上で実行してください。
 
 ```
 git clone https://github.com/tosite/gtb-web-application-framework.git
