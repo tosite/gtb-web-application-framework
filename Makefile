@@ -17,6 +17,7 @@ setup/docker:
 setup/conoha:
 	cp .env.example .env
 	$(eval MYSQL_PASS=$(shell sed -n 7p /etc/motd | cut -d " " -f 3))
+	@sed -i -e 's/^DB_USERNAME=root$$/DB_USERNAME=conoha/' .env
 	@sed -i -e 's/^DB_HOST=127.0.0.1$$/DB_HOST=localhost/' .env
 	@sed -i -e 's/^DB_PASSWORD=$$/DB_PASSWORD=$(MYSQL_PASS)/' .env
 	composer install && php artisan key:generate && make db/setup
@@ -31,6 +32,8 @@ setup/conoha:
 db/setup:
 	$(eval include .env)
 	$(eval export sed 's/=.*//' .env)
+	mysql -uroot -p${DB_PASSWORD} -h${DB_HOST} -e 'create user if not exists ${DB_USERNAME}@${DB_HOST} identified by "${DB_PASSWORD}";'
+	mysql -uroot -p${DB_PASSWORD} -h${DB_HOST} -e 'grant all privileges on ${DB_DATABASE}.* to ${DB_USERNAME}@${DB_HOST};'
 	mysql -u${DB_USERNAME} -p${DB_PASSWORD} -h${DB_HOST} -e 'create database if not exists ${DB_DATABASE};'
 	php artisan migrate
 
