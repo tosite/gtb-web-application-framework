@@ -17,4 +17,9 @@ Route::middleware('api')->group(function () {
 
     // Edit the botttom from here!
     Route::get('comments', 'CommentController@index');
+    Route::get('comments/{comment}', 'CommentController@show');
+    Route::post('comments', 'CommentController@store');
+    Route::put('comments/{comment}', 'CommentController@update');
+    Route::patch('comments/{comment}', 'CommentController@update');
+    Route::delete('comments/{comment}', 'CommentController@destroy');
 });
